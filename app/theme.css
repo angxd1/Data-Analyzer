@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg-app: #f8f9fb;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f1f5f9;
+  --bg-hero-start: #eefcf5;
+  --bg-hero-end: #f1f5ff;
+  --bg-glow-1: #e9f9f1;
+  --bg-glow-2: #eef3ff;
+  --text-primary: #0b0f14;
+  --text-secondary: #3b4452;
+  --text-muted: #6b7785;
+  --border-subtle: #e3e8ef;
+  --accent: #2bdc88;
+  --accent-contrast: #0b0f14;
+  --accent-soft: #e6fbf1;
+  --shadow-1: 0 10px 30px rgba(11, 15, 20, 0.08);
+  --shadow-2: 0 6px 16px rgba(11, 15, 20, 0.06);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
+}
+
+html, body {
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+small {
+  color: var(--text-muted);
+}
+
+button {
+  font-family: 'Sora', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--shadow-2);
+}
+
+.stApp {
+  background: radial-gradient(circle at 10% 0%, var(--bg-glow-1) 0%, transparent 40%),
+              radial-gradient(circle at 90% 0%, var(--bg-glow-2) 0%, transparent 35%),
+              var(--bg-app);
+}
+
+.stApp, .stMarkdown, .stText, .stCaption, .stMarkdown p, .stMarkdown span {
+  color: var(--text-primary);
+}
+
+.hero {
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(120deg, var(--bg-surface), var(--bg-hero-start) 60%, var(--bg-hero-end) 100%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-1);
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0.1rem 0 0.4rem 0;
+  color: var(--text-primary);
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.8rem;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+}
+
+.hero-badges .badge {
+  color: #ffffff;
+}
+
+.badge-light {
+  color: #ffffff;
+}
+
+[data-baseweb="tab-list"] {
+  gap: 0.5rem;
+}
+
+[data-baseweb="tab"] {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 1rem;
+  color: var(--text-primary);
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  background: var(--accent-soft);
+}
+
+.block-container {
+  padding-top: 1.2rem;
+}
+
+.section-note {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+}
+
+code, pre, .stCodeBlock, .stDataFrame, .stMetricValue {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.stCaption,
+.stMarkdown small,
+.stMarkdown em {
+  color: var(--text-muted);
+}
+
+.sidebar-caption {
+  color: #ffffff;
+}
+
+.stButton > button,
+.stDownloadButton > button,
+.stFileUploader button,
+.stForm button {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 600;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover,
+.stFileUploader button:hover,
+.stForm button:hover {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.stButton > button:focus,
+.stDownloadButton > button:focus,
+.stFileUploader button:focus,
+.stForm button:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.stButton > button:disabled,
+.stDownloadButton > button:disabled,
+.stFileUploader button:disabled,
+.stForm button:disabled {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border-color: var(--border-subtle);
+}
+
+.stFileUploader [data-testid="stFileUploaderDropzone"] {
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.stFileUploader [data-testid="stFileUploaderDropzone"] * {
+  color: var(--text-secondary);
+}
+
+.stMetric label,
+.stMetricValue,
+.stMetricDelta {
+  color: var(--text-primary);
+}
+
+.stAlert,
+.stSuccess,
+.stInfo,
+.stWarning,
+.stError {
+  color: var(--text-primary);
+}
+
+label,
+.stMarkdown label,
+.stSelectbox label,
+.stFileUploader label,
+.stTextInput label {
+  color: var(--text-primary) !important;
+}
+
+input,
+textarea,
+select {
+  color: var(--text-primary);
+  background: var(--bg-surface);
+}
