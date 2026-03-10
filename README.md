@@ -6,6 +6,17 @@ This project focuses on a practical question: is a CSV structurally healthy enou
 
 It is not a production data quality platform. The diagnostics are rule-based heuristics designed for small-to-medium tabular datasets, and the repository now makes that explicit.
 
+## Live Demo
+
+[Open the app](https://data-analyzer-s6jcpxygphyuv5rwxcmozt.streamlit.app/)
+
+## Screenshots
+
+![Overview](assets/screenshots/overview.png)
+![Data Quality](assets/screenshots/data_quality.png)
+![Visuals](assets/screenshots/visuals.png)
+![Report](assets/screenshots/report.png)
+
 ## What It Does
 
 - Upload a CSV or load a built-in sample dataset
