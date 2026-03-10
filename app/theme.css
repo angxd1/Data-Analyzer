@@ -1,20 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
-  --bg-app: #f8f9fb;
+  --bg-app: #f3f8f5;
   --bg-surface: #ffffff;
-  --bg-elevated: #f1f5f9;
-  --bg-hero-start: #eefcf5;
-  --bg-hero-end: #f1f5ff;
-  --bg-glow-1: #e9f9f1;
-  --bg-glow-2: #eef3ff;
+  --bg-elevated: #edf5f1;
+  --bg-hero-start: #dcf8e7;
+  --bg-hero-end: #e6f5ec;
+  --bg-glow-1: #cef5de;
+  --bg-glow-2: #e0f7e9;
   --text-primary: #0b0f14;
   --text-secondary: #3b4452;
   --text-muted: #6b7785;
   --border-subtle: #e3e8ef;
   --accent: #2bdc88;
   --accent-contrast: #0b0f14;
-  --accent-soft: #e6fbf1;
+  --accent-soft: #d8f8e6;
+  --sidebar-bg: linear-gradient(180deg, #16211d 0%, #1e2c27 100%);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-text: #f5fff9;
+  --sidebar-muted: #bdd3c7;
   --shadow-1: 0 10px 30px rgba(11, 15, 20, 0.08);
   --shadow-2: 0 6px 16px rgba(11, 15, 20, 0.06);
   --radius-lg: 20px;
@@ -49,8 +53,9 @@ button {
 }
 
 .stApp {
-  background: radial-gradient(circle at 10% 0%, var(--bg-glow-1) 0%, transparent 40%),
-              radial-gradient(circle at 90% 0%, var(--bg-glow-2) 0%, transparent 35%),
+  background: radial-gradient(circle at 8% 0%, var(--bg-glow-1) 0%, transparent 46%),
+              radial-gradient(circle at 85% 0%, var(--bg-glow-2) 0%, transparent 40%),
+              linear-gradient(180deg, rgba(43, 220, 136, 0.04) 0%, transparent 22%),
               var(--bg-app);
 }
 
@@ -60,8 +65,9 @@ button {
 
 .hero {
   padding: 1.4rem 1.6rem;
+  margin-top: 1rem;
   border-radius: var(--radius-lg);
-  background: linear-gradient(120deg, var(--bg-surface), var(--bg-hero-start) 60%, var(--bg-hero-end) 100%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.98), var(--bg-hero-start) 58%, var(--bg-hero-end) 100%);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-1);
 }
@@ -129,7 +135,7 @@ button {
 }
 
 .block-container {
-  padding-top: 1.2rem;
+  padding-top: 2.2rem;
 }
 
 .section-note {
@@ -156,7 +162,38 @@ pre,
 }
 
 .sidebar-caption {
-  color: #ffffff;
+  color: var(--sidebar-muted) !important;
+}
+
+[data-testid="stSidebar"] {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+}
+
+[data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+  background: transparent;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] div {
+  color: var(--sidebar-text);
+}
+
+[data-testid="stSidebar"] .stButton > button {
+  background: linear-gradient(135deg, var(--accent) 0%, #5cf0a6 100%);
+  color: var(--accent-contrast);
+  border: none;
+  box-shadow: 0 10px 24px rgba(43, 220, 136, 0.18);
+}
+
+[data-testid="stSidebar"] .stButton > button:hover {
+  background: linear-gradient(135deg, #52eba1 0%, #88f7bf 100%);
+  color: var(--accent-contrast);
 }
 
 .stButton > button,
