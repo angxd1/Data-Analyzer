@@ -104,10 +104,7 @@ st.sidebar.header("Quick Actions")
 if st.sidebar.button("Reset session"):
     st.session_state.clear()
     st.rerun()
-st.sidebar.markdown(
-    "<div class='sidebar-caption'>Upload a CSV or load the sample dataset.</div>",
-    unsafe_allow_html=True,
-)
+st.sidebar.caption("Upload a CSV or load the sample dataset.")
 
 st.write("")
 
