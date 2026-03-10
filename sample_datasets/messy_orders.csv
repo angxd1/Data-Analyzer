@@ -1,0 +1,9 @@
+order_id,order_date,customer_segment,total_amount,status,discount_code
+1,2024-01-10,Retail,125.50,Completed,SAVE10
+2,2024-01-11,Retail,,Completed,
+3,2024-01-11,Retail,89.99,Completed,
+4,2024-01-12,Enterprise,1025.00,Pending,VIP50
+4,2024-01-12,Enterprise,1025.00,Pending,VIP50
+5,2024-01-13,SMB,19.99,Cancelled,
+6,2024-01-14,SMB,20.50,Completed,SPRING
+7,2024-01-15,Retail,9999.99,Completed,SPRING

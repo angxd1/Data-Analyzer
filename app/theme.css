@@ -141,6 +141,14 @@ code, pre, .stCodeBlock, .stDataFrame, .stMetricValue {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
+pre,
+.stCodeBlock,
+[data-testid="stCodeBlock"] pre,
+[data-testid="stCode"] pre {
+  color: var(--text-primary) !important;
+  background: var(--bg-surface) !important;
+}
+
 .stCaption,
 .stMarkdown small,
 .stMarkdown em {
@@ -148,7 +156,7 @@ code, pre, .stCodeBlock, .stDataFrame, .stMetricValue {
 }
 
 .sidebar-caption {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .stButton > button,

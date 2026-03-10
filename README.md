@@ -1,161 +1,83 @@
-# 🚀 Smart Data Analyzer — Data Intelligence & Validation Platform
+# Data Health Console
 
-A full-stack Python analytics system built to diagnose data quality, infer schema structure, and generate reliable insights before analysis or modeling.
+A Streamlit application for quick dataset triage before deeper analysis or modeling.
 
-Most student projects visualize data.  
-This system is built to understand whether the data should be trusted in the first place.
+This project focuses on a practical question: is a CSV structurally healthy enough to trust? It lets you upload a dataset, apply a small cleaning pipeline, inspect validation warnings, review a heuristic quality score, and export a text report or cleaned CSV.
 
-It ingests datasets, applies configurable cleaning pipelines, runs automated validation and schema inference, computes a data-quality score, generates insights, and produces exportable reports — all backed by a persistent storage layer.
+It is not a production data quality platform. The diagnostics are rule-based heuristics designed for small-to-medium tabular datasets, and the repository now makes that explicit.
 
----
+## What It Does
 
-## 🎯 Problem & Motivation
+- Upload a CSV or load a built-in sample dataset
+- Apply optional cleaning steps:
+  - trim string columns
+  - fill missing numeric values with medians
+  - fill missing categorical values with `"Unknown"`
+  - auto-convert numeric-looking columns
+  - drop duplicate rows
+- Run validation checks for:
+  - identifier-like columns
+  - constant or near-constant columns
+  - datetime-like columns
+  - high-cardinality categoricals
+  - numeric columns that likely behave as categories
+  - numeric distribution warnings
+- Compute a heuristic 0-100 data quality score
+- Generate a plain-text report
+- Persist cleaned snapshots and saved reports in SQLite
 
-In real analytics and ML workflows, the biggest failures don’t come from models — they come from bad data.
+## Why This Project Is Useful
 
-Common issues:
-- identifier columns treated as features  
-- hidden duplicates  
-- mislabeled types  
-- silent outliers  
-- constant or misleading columns  
+Many early analytics mistakes come from dataset quality issues rather than model choice:
 
-These problems lead to incorrect conclusions and broken pipelines.
+- IDs get treated as features
+- datelike text is left unparsed
+- duplicate rows distort counts
+- missing values are ignored until late
+- low-information columns waste attention
 
-This project was built to act as a data gatekeeper — a system that evaluates dataset structure, reliability, and readiness before analysis or modeling begins.
+This app is intended to catch those problems early and make them visible in a lightweight workflow.
 
----
+## Project Scope
 
-## 🖥️ Demo
+This repository is strongest as:
 
-Add screenshots in `assets/screenshots/` if you want a visual portfolio section. The app currently ships without committed image assets.
+- a well-scoped data quality and profiling project
+- a modular Python app with UI, service layer, validation logic, persistence, and tests
+- a concrete example of turning data heuristics into a usable product workflow
 
----
+This repository is not trying to be:
 
-## ✨ Core Capabilities
+- a full observability platform
+- a distributed ETL system
+- a statistically rigorous substitute for domain-specific validation
 
-### 🔹 Ingestion & Cleaning Engine
-- CSV ingestion with defensive parsing  
-- Modular preprocessing pipeline  
-- Duplicate removal, numeric imputation, categorical normalization  
-- Numeric auto-conversion & whitespace standardization  
-- Before/after dataset inspection  
-- Cleaning summary with measurable transformations  
+## Repository Highlights
 
----
+- Modularized logic across `services/`, `ui/`, `validation.py`, and `storage.py`
+- Persistent storage with SQLite for datasets, cleaned snapshots, and reports
+- Sample datasets in `sample_datasets/` for regression coverage
+- Automated tests for cleaning, validation, scoring, and reporting
+- GitHub Actions CI to run the test suite on push and pull request
 
-### 🔹 Dataset Validation & Schema Intelligence
-- Identifier-like column detection  
-- Constant / near-constant column detection  
-- Datetime feature inference  
-- High-cardinality categorical detection  
-- Numeric-as-categorical detection  
-- Distribution risk diagnostics  
-
-Produces structured diagnostics and schema summaries describing the role, reliability, and risk of each column.
-
----
-
-### 🔹 Data Quality Scoring System
-- Quantitative 0–100 reliability score  
-- Penalty-based evaluation using missingness, duplicates, constants, anomalies, and instability  
-- Interpretable breakdown surfaced in UI and reports  
-
----
-
-### 🔹 Analytics & Visualization Layer
-- Missing-value profiling  
-- Numeric statistics + medians  
-- Categorical frequency analysis  
-- Correlation matrices  
-- IQR-based outlier detection  
-- Interactive histograms, box plots, scatter plots, and categorical bar charts  
-
----
-
-### 🔹 Automated Insight Engine
-- Flags high-risk columns  
-- Detects structural anomalies  
-- Surfaces strong correlations  
-- Highlights dominant categories  
-- Emits validation warnings  
-
----
-
-### 🔹 Persistence & Reproducibility
-- SQLite backend storing datasets, cleaned snapshots, and reports  
-- Historical analysis browser  
-- Reproducible analytics workflows  
-
----
-
-### 🔹 Reporting & Export
-- Downloadable cleaned datasets  
-- Auto-generated analysis reports  
-- Embedded diagnostics & quality scoring  
-- Report previews and history  
-
----
-
-## 🏗️ System Architecture
-CSV Ingestion
-↓
-Cleaning Engine
-↓
-Validation & Schema Intelligence
-↓
-Analytics & Computation
-↓
-Automated Insights
-↓
-Report Generation
-↓
-SQLite Persistence Layer
-
-The system is modularized into independent engines for preprocessing, validation, analytics, insights, reporting, and storage.
-
----
-
-## 🛠️ Tech Stack
-
-Languages & Core  
-- Python  
-
-Frameworks & Libraries  
-- Streamlit  
-- Pandas  
-- NumPy  
-- Matplotlib  
-
-Backend & Storage  
-- SQLite (sqlite3)  
-
-Engineering Concepts  
-- ETL-style pipeline design  
-- Schema inference  
-- Data validation systems  
-- Diagnostic scoring frameworks  
-- Persistent storage layers  
-- Modular architecture  
-- Separation of concerns  
-- Defensive programming  
-- Reproducible workflows  
-- Performance caching  
-
----
-
-## 📁 Example Project Structure
+## Example Project Structure
 
 ```text
 app.py
 storage.py
 validation.py
 requirements.txt
+Makefile
 README.md
 .streamlit/config.toml
+.github/workflows/ci.yml
 
 app/
   theme.css
+
+sample_datasets/
+  customer_profiles.csv
+  messy_orders.csv
 
 services/
   analytics.py
@@ -166,6 +88,7 @@ tests/
   conftest.py
   test_cleaning.py
   test_quality_score.py
+  test_reporting.py
   test_validation.py
 
 ui/
@@ -173,9 +96,7 @@ ui/
   sections.py
 ```
 
----
-
-## ▶️ Running the Project
+## Running Locally
 
 ```bash
 python3 -m venv venv
@@ -184,97 +105,67 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Open in browser:
-`http://localhost:8501`
+Open `http://localhost:8501`
 
-## 📊 Example Use Cases
+You can also use:
 
-- Survey and research dataset validation
-- Pre-modeling data audits
-- Business and retail dataset diagnostics
-- Feature health checks
-- Academic experiment analysis
-- Automated exploratory data analysis
+```bash
+make install
+make test
+make run
+```
 
----
+## Tests
 
-## 🧠 Engineering Highlights
+Run the test suite with:
 
-- Designed a full analytics pipeline: ingest → clean → validate → analyze → report → persist
-- Implemented a schema inference and dataset diagnostics engine
-- Built a quantitative data-quality scoring framework
-- Engineered a persistent backend layer for reproducible workflows
-- Developed an automated insight and reporting system
+```bash
+pytest
+```
 
----
+Current coverage is focused on:
 
-## 🚧 Future Extensions
+- cleaning behavior
+- validation false positives and expected detections
+- quality score directionality
+- report generation
 
-- Pipeline versioning and replay
-- Background job processing
-- Feature recommendation engine
-- Cloud database migration
-- Scheduled dataset monitoring
-- User profiles and access control
+## Sample Data
 
----
+The repository includes small CSV fixtures for repeatable checks:
 
-👤 Author
+- `sample_datasets/customer_profiles.csv`
+- `sample_datasets/messy_orders.csv`
 
-Built by Angad Singh
-Focused on software engineering, analytics systems, and data platform design.
+These are used by the tests to verify that:
 
----
+- obvious identifiers are detected without flagging `age` or `salary`
+- date columns are detected without classifying arbitrary numeric columns as temporal
+- messy data scores worse than cleaner data
 
-# 📸 COPY-PASTE SCREENSHOT CHECKLIST
+## Technical Notes
 
-```markdown
-## 📸 Screenshot Checklist
+- UI framework: Streamlit
+- Analysis stack: Pandas, NumPy, Matplotlib
+- Storage: SQLite via `sqlite3`
+- Validation logic: heuristic and rule-based, not ML-driven
+- Reports: plain-text summaries intended for fast review, not formatted business deliverables
 
-Create folder:
-`assets/screenshots/`
+## Limitations
 
-Take high-resolution screenshots of:
+- Validation rules are heuristic and may still need tuning for domain-specific datasets
+- The quality score is intentionally interpretable, but not statistically calibrated
+- Persistence is local SQLite only
+- The app is designed for local use and portfolio demonstration, not multi-user deployment
 
-1) Upload & Cleaning  
-   - file upload  
-   - cleaning toggles  
-   - cleaning summary  
-   - raw vs cleaned preview  
-   → upload_cleaning.png
+## Next Upgrades That Would Increase Resume Value
 
-2) Dataset Diagnostics  
-   - schema validation  
-   - warnings  
-   - column role detection  
-   → diagnostics.png
+- config-driven validation rules instead of hard-coded thresholds
+- richer report output such as HTML or PDF
+- dataset-to-dataset comparison or drift views
+- stronger test coverage around persistence and edge-case parsing
+- typed models for report and validation outputs
 
-3) Data Quality Score  
-   - score metric  
-   - penalty breakdown  
-   → quality_score.png
+## Author
 
-4) Analytics & Visuals  
-   - charts  
-   - statistics tables  
-   - correlation matrix  
-   → analytics_visuals.png
-
-5) Automated Insights  
-   - generated insights  
-   - warnings  
-   → insights.png
-
-6) Persistence & History  
-   - saved datasets  
-   - report history  
-   → history.png
-
-Insert near top of README:
-
-![Upload & Cleaning](assets/screenshots/upload_cleaning.png)
-![Dataset Diagnostics](assets/screenshots/diagnostics.png)
-![Data Quality Score](assets/screenshots/quality_score.png)
-![Analytics](assets/screenshots/analytics_visuals.png)
-![Insights](assets/screenshots/insights.png)
-![History](assets/screenshots/history.png)
+Built by Angad Singh.

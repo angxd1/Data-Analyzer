@@ -1,0 +1,11 @@
+customer_id,age,city,salary,signup_date,plan,active
+1001,23,New York,72000,2023-01-14,Pro,True
+1002,41,Chicago,98000,2022-11-03,Basic,True
+1003,35,San Francisco,132000,2021-05-19,Pro,True
+1004,29,Austin,88000,2023-07-22,Basic,False
+1005,52,Seattle,150000,2020-02-08,Enterprise,True
+1006,46,Boston,115000,2019-09-14,Pro,True
+1007,31,Miami,79000,2023-03-11,Basic,False
+1008,27,Denver,83000,2022-06-30,Basic,True
+1009,39,Atlanta,97000,2021-08-04,Pro,True
+1010,33,Los Angeles,102000,2022-12-12,Pro,True

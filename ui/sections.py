@@ -115,4 +115,5 @@ def render_exports(df, report):
             "text/plain",
         )
 
-    st.text(report[:2000])
+    st.subheader("Report Preview")
+    st.code(report[:2000], language=None)
